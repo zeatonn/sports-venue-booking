@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { dbSetup } from "./config/db.js";
 import express from "express";
 import morgan from "morgan";
+import cors from 'cors';
 import bodyParser from "body-parser";
 import { mainRouter } from "./routes/main.js";
 
@@ -14,6 +15,9 @@ dbSetup();
 async function main() {
     const app = express();
     const port = process.env.PORT ?? 8080;
+
+    // fix CORS
+    app.use(cors());
 
     // setup json body parsing
     app.use(bodyParser.json())

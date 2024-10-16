@@ -1,23 +1,7 @@
 import { db } from "../config/db.js";
 
-// defining the common selection fields to be sent to client whenever requesting multiple centers
-const CenterSemiSelectObj = {
-    id: true,
-    name: true,
-    desc: true,
-    location: true,
-    createdAt: true,
-    updatedAt: true,
-
-    _count: {
-        select: {
-            sports: true
-        }
-    }
-}
-
-// defining the common selection fields to be sent to client whenever requesting individual center
-const CenterFullSelectObj = {
+// defining the common selection fields to be sent to client 
+const CenterSelectObj = {
     id: true,
     name: true,
     desc: true,
@@ -53,7 +37,7 @@ export async function createCenter(centerObj) {
 // get list of all centers that exist
 export async function getAllCenters() {
     const allCenters = await db.center.findMany({
-        select: CenterSemiSelectObj
+        select: CenterSelectObj
     });
 
     return allCenters;
@@ -65,7 +49,7 @@ export async function getCenter(centerId) {
         where: {
             id: centerId
         },
-        select: CenterFullSelectObj
+        select: CenterSelectObj
     });
 
     return center;

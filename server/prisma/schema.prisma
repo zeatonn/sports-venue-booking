@@ -41,7 +41,7 @@ model Sport {
 }
 
 model SportCenter {
-  id       String @unique
+  id       String @unique @default(uuid())
   sportId  String
   centerId String
 
@@ -57,7 +57,7 @@ model SportCenter {
 }
 
 model Court {
-  id            String  @unique
+  id            String  @unique @default(uuid())
   name          String
   desc          String?
   sportCenterId String
@@ -73,11 +73,11 @@ model Court {
 }
 
 model Booking {
-  id        String   @unique
+  id        String   @unique @default(uuid())
   startTime DateTime
   endTime   DateTime
   courtId   String
-  comments  String?
+  comments  String
 
   court Court @relation(fields: [courtId], references: [id])
 

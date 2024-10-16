@@ -24,7 +24,7 @@ courtRouter.post('/add-booking', async (req,res)=>{
 
 courtRouter.get('/all/:sportcenterid/:date', async(req,res)=>{
     const {sportcenterid, date} = req.params;
-    const allCourts=await getAllBookings(sportcenterid,date);
+    const allCourts=await getAllBookings(sportcenterid,new Date(date));
     return response_200(res, 'List of all courts with their bookings', allCourts);
 })
 
