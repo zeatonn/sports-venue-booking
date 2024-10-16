@@ -33,13 +33,6 @@ const CenterFullSelectObj = {
                     id: true,
                     name: true,
                 }
-            },
-            courts: {
-                select: {
-                    id: true,
-                    name: true,
-                    desc: true,
-                }
             }
         }
     }
