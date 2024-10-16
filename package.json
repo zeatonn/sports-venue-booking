@@ -1,0 +1,16 @@
+{
+  "name": "sports-venue-booking",
+  "version": "1.0.0",
+  "description": "Booking app for a sports technology company's operations team.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
