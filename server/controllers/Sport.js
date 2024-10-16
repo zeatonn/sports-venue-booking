@@ -66,6 +66,8 @@ export async function getSport(sportId) {
         },
         select: SportFullSelectObj
     })
+
+    return sport;
 }
 
 // delete the sport whose id is provided
