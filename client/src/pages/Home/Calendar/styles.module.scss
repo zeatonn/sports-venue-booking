@@ -1,0 +1,40 @@
+.cont {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  margin: 32px;
+  max-height: calc(100vh - 300px);
+  overflow: auto;
+  border: 1px solid grey;
+  }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+
+  border-bottom: 1px solid grey;
+  background-color: rgb(36, 36, 36);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.header_card {
+  height: 32px;
+  width: 156px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking {
+  width: 156px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
