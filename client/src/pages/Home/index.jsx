@@ -86,10 +86,9 @@ export default function HomePage() {
                 {sport && (
                   <>
                     <DatePicker value={date} onChange={(e) => setDate(e)} />
+                    <NewCourt sportId={sport.id} fetchCourts={fetchCourts} />
                   </>
                 )}
-
-                <NewCourt sportId={sport.id} fetchCourts={fetchCourts} />
               </>
             )}
           </>
