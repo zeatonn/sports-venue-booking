@@ -24,12 +24,7 @@ export default function Calendar({ courts, date, fetchCourts }) {
   const createBooking = useCallback(() => {
     axios
       .post("/court/add-booking", {
-        startTime: dayjs(date)
-          .set("hour", hour - 2)
-          .set("minute", 0)
-          .set("second", 0)
-          .set("millisecond", 0)
-          .toISOString(),
+        startTime: new Date(date.set("h", hour).toDate()),
         courtId: court.id,
         comments,
       })

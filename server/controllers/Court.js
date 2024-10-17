@@ -53,7 +53,7 @@ export async function getAllBookings(sportCenterId, date) {
 
 export async function createBooking(bookingObj) {
     console.log(bookingObj.startTime)
-    bookingObj.startTime = new Date((new Date(bookingObj.startTime)).setMinutes(0, 0, 0));
+    bookingObj.startTime = new Date((new Date(bookingObj.startTime)));
     const {courtId, startTime} = bookingObj;
 
     const alreadyExists = await db.booking.count({
@@ -72,7 +72,7 @@ export async function createBooking(bookingObj) {
         throw new Error('Court already booked for this slot!')
     }
 
-    bookingObj.endTime = new Date(startTime.setHours(startTime.getHours() + 2, 0, 0, 0));
+    bookingObj.endTime = new Date(startTime + 60 * 60 * 1000);
 
     const newBooking = await db.booking.create({
         data: bookingObj,
