@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./styles.module.scss";
 import NewSport from "./NewSport";
+import Navbar from "../../components/Navbar";
 
 export default function SportsPage() {
   const [sports, setSports] = useState();
@@ -17,14 +18,18 @@ export default function SportsPage() {
   }, []);
 
   return (
-    <main className={styles.page_cont}>
-      <h2>All Sports</h2>
-      <div className={styles.sports_cont}>
-        {sports
-          ? sports.map((sport, index) => <div key={index}>{sport.name}</div>)
-          : null}
-      </div>
-      <NewSport fetchSports={fetchAllSports} />
-    </main>
+    <>
+      <Navbar />
+
+      <main className={styles.page_cont}>
+        <h2>All Sports</h2>
+        <div className={styles.sports_cont}>
+          {sports
+            ? sports.map((sport, index) => <div key={index}>{sport.name}</div>)
+            : null}
+        </div>
+        <NewSport fetchSports={fetchAllSports} />
+      </main>
+    </>
   );
 }

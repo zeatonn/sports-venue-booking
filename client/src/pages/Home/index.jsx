@@ -7,6 +7,7 @@ import AddSport from "./AddSport";
 import dayjs from "dayjs";
 import NewCourt from "./NewCourt";
 import Calendar from "./Calendar";
+import Navbar from "../../components/Navbar";
 
 export default function HomePage() {
   const [allCenters, setAllCenters] = useState(null);
@@ -49,54 +50,62 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className={styles.page_cont}>
-      <div className={styles.filter_row}>
-        {allCenters !== null && (
-          <>
-            <Select
-              value={center ? center.name : ""}
-              style={{ width: 120 }}
-              onChange={(e) => {
-                const newCenter = allCenters.find((center) => center.id === e);
-                setCenter(newCenter);
-              }}
-              options={allCenters.map((center) => ({
-                value: center.id,
-                label: center.name,
-              }))}
-            />
-            <NewCenter fetchCenters={fetchAllCenters} />
+    <>
+      <Navbar />
+      <main className={styles.page_cont}>
+        <div className={styles.filter_row}>
+          {allCenters !== null && (
+            <>
+              <Select
+                value={center ? center.name : ""}
+                style={{ width: 120 }}
+                onChange={(e) => {
+                  const newCenter = allCenters.find(
+                    (center) => center.id === e
+                  );
+                  setCenter(newCenter);
+                }}
+                options={allCenters.map((center) => ({
+                  value: center.id,
+                  label: center.name,
+                }))}
+              />
+              <NewCenter fetchCenters={fetchAllCenters} />
 
-            {center && (
-              <>
-                <Select
-                  value={sport ? sport.id : ""}
-                  style={{ width: 120 }}
-                  onChange={(e) => {
-                    const newSport = center.sports.find((s) => s.id === e);
-                    setSport(newSport);
-                  }}
-                  options={center.sports.map((sport) => ({
-                    value: sport.id,
-                    label: sport.sport.name,
-                  }))}
-                />
-                <AddSport centerId={center.id} fetchCenters={fetchAllCenters} />
+              {center && (
+                <>
+                  <Select
+                    value={sport ? sport.id : ""}
+                    style={{ width: 120 }}
+                    onChange={(e) => {
+                      const newSport = center.sports.find((s) => s.id === e);
+                      setSport(newSport);
+                    }}
+                    options={center.sports.map((sport) => ({
+                      value: sport.id,
+                      label: sport.sport.name,
+                    }))}
+                  />
+                  <AddSport
+                    centerId={center.id}
+                    fetchCenters={fetchAllCenters}
+                  />
 
-                {sport && (
-                  <>
-                    <DatePicker value={date} onChange={(e) => setDate(e)} />
-                    <NewCourt sportId={sport.id} fetchCourts={fetchCourts} />
-                  </>
-                )}
-              </>
-            )}
-          </>
+                  {sport && (
+                    <>
+                      <DatePicker value={date} onChange={(e) => setDate(e)} />
+                      <NewCourt sportId={sport.id} fetchCourts={fetchCourts} />
+                    </>
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </div>
+        {courts && (
+          <Calendar date={date} courts={courts} fetchCourts={fetchCourts} />
         )}
-      </div>
-      {courts && (
-        <Calendar date={date} courts={courts} fetchCourts={fetchCourts} />
-      )}
-    </main>
+      </main>
+    </>
   );
 }
