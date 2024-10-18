@@ -10,6 +10,7 @@ export default function Calendar({ courts, date, fetchCourts }) {
   const [hour, setHour] = useState(0);
   const [comments, setComments] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   function isBookingInHour(bookings, targetHour) {
     return bookings.find((booking) => {
@@ -21,6 +22,12 @@ export default function Calendar({ courts, date, fetchCourts }) {
     });
   }
 
+const showConfirmationModal=()=>{
+  setIsConfirmModalOpen(true)
+  setTimeout(()=>{
+    setIsConfirmModalOpen(false);
+  },5000)
+}
   const createBooking = useCallback(() => {
     axios
       .post("/court/add-booking", {
@@ -31,6 +38,8 @@ export default function Calendar({ courts, date, fetchCourts }) {
       .then(() => {
         fetchCourts();
         setIsModalOpen(false);
+        // setIsConfirmModalOpen(true);
+        showConfirmationModal();
       });
   }, [courts, hour, comments]);
 
@@ -48,7 +57,7 @@ export default function Calendar({ courts, date, fetchCourts }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  if (!courts) return null
   return (
     <div className={styles.cont}>
       <div
@@ -114,6 +123,18 @@ export default function Calendar({ courts, date, fetchCourts }) {
           value={comments}
           onChange={(e) => setComments(e.target.value)}
         />
+      </Modal>
+      <Modal
+        title={`New Booking confirmation for hours ${hour}:00 - ${
+          hour + 1
+        }:00 in ${court?.name}`}
+        open={isConfirmModalOpen}
+        onOk={() => {
+          setIsConfirmModalOpen(false);
+        }}
+      >
+        {" "}
+        Booking Confirmed
       </Modal>
     </div>
   );

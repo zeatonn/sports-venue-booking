@@ -21,7 +21,7 @@ export default function HomePage() {
     setAllCenters(null);
     axios.get("/center/all").then((res) => {
       setAllCenters(res.data.data);
-      if (!center && res.data.data.length) {
+      if (res.data.data.length) {
         setCenter(res.data.data[0]);
         if (!sport && res.data.data[0].sports.length) {
           setSport(res.data.data[0].sports[0]);
@@ -102,9 +102,7 @@ export default function HomePage() {
             </>
           )}
         </div>
-        {courts && (
-          <Calendar date={date} courts={courts} fetchCourts={fetchCourts} />
-        )}
+        <Calendar date={date} courts={courts} fetchCourts={fetchCourts} />
       </main>
     </>
   );

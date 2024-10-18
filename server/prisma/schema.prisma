@@ -76,6 +76,8 @@ model Booking {
   id        String   @unique @default(uuid())
   startTime DateTime
   endTime   DateTime
+  isWaitlisted Boolean 
+  isCancelled Boolean 
   courtId   String
   comments  String
 
